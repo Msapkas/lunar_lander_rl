@@ -3,14 +3,16 @@
 ## Evaluating Value-Based and Actor-Critic Methods on the Lunar Lander Environment 🚀
  
 **Author:** Sapkas Michail
+
 **Student ID:** 2154102
-**Email:** \[michail.sapkas@phd.unipd.it]
+
+**Email:** michail.sapkas@phd.unipd.it
 
 ---
 
 ## Course Submission
 
-**Submitted for the course of\* \*\*Prof. Giorgio Carlo Buttazzo** 
+**Submitted for the course of Prof. Giorgio Carlo Buttazzo** 
 
 **PhD Program in Technologies for Fundamental Research in Physics and Astrophysics** 
 
