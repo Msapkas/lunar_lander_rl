@@ -250,7 +250,7 @@ The networks are optimized independently using separate Adam configurations, app
 
 As an on-policy algorithm, PPO alternates between environmental data collection and optimization phases. Trajectories are gathered over a fixed horizon of $T\_{\\text{horizon}} = 2048$ timesteps, storing states, actions, rewards, terminal masks, and the corresponding log-probabilities ($\\log \\pi\_{\\theta\_{\\text{old}}}(a\_t|s\_t)$) of the behavioral policy.
 
-To achieve an optimal balance between bias and variance when evaluating policy trajectories, Generalized Advantage Estimation (GAE) \[\[^8]] is performed over the collected buffer. For a discount factor $\\gamma = 0.99$ and a smoothing hyperparameter $\\lambda = 0.95$, the temporal difference (TD) residual $\\delta\_t$ and the generalized advantage estimator $\\hat{A}\_t$ at step $t$ are computed as follows:
+To achieve an optimal balance between bias and variance when evaluating policy trajectories, Generalized Advantage Estimation (GAE) [^8] is performed over the collected buffer. For a discount factor $\\gamma = 0.99$ and a smoothing hyperparameter $\\lambda = 0.95$, the temporal difference (TD) residual $\\delta\_t$ and the generalized advantage estimator $\\hat{A}\_t$ at step $t$ are computed as follows:
 
 $$\\begin{align}
 \\delta\_t \&= r\_t + \\gamma V^\\phi(s\_{t+1})(1 - d\_t) - V^\\phi(s\_t) \\
@@ -321,5 +321,5 @@ Ultimately, the primary takeaway from these experiments is the extreme sensitivi
 
 [^7]: Schulman et al. (2017). *Proximal Policy Optimization Algorithms*. [arXiv:1707.06347](https://arxiv.org/abs/1707.06347).
 
-\[^8]: Schulman et al. (2015). *High-Dimensional Continuous Control Using Generalized Advantage Estimation*. [arXiv:1506.02438](https://arxiv.org/abs/1506.02438).
+[^8]: Schulman et al. (2015). *High-Dimensional Continuous Control Using Generalized Advantage Estimation*. [arXiv:1506.02438](https://arxiv.org/abs/1506.02438).
 
