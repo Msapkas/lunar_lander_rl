@@ -1,26 +1,19 @@
-:::: titlepage
-**Deep Neural Networks Final Project**\
+# 🚀 Deep Neural Networks Final Project
 
-**Evaluating Value-Based and Actor-Critic Methods on the Lunar Lander
-Environment**\
-**Sapkas Michail**\
-Student ID: 2154102\
-Email: <michail.sapkas@phd.unipd.it>\
-*Submitted for the course of*\
-**Prof. Giorgio Carlo Buttazzo**\
+> ## Evaluating Value-Based and Actor-Critic Methods on the Lunar Lander Environment
+> 
+> **Author:** Sapkas Michail  
+> **Student ID:** 2154102  
+> **Email:** [michail.sapkas@phd.unipd.it](mailto:michail.sapkas@phd.unipd.it)  
+>
+> ---
+> 
+> ### 🎓 Course Submission
+> *Submitted for the course of* **Prof. Giorgio Carlo Buttazzo** > 
+> **PhD Program in Technologies for Fundamental Research in Physics and Astrophysics** > *Dipartimento di Fisica ed Astronomia "Galileo Galilei"* > **UNIVERSITÀ DEGLI STUDI DI PADOVA & INFN SEZIONE DI PADOVA** > 
+> 🗓️ *July 10, 2026*
 
-PhD Program in Technologies for Fundamental Research in Physics and
-Astrophysics\
-
-::: small
-Dipartimento di Fisica ed Astronomia "Galileo Galilei"\
-[Università degli Studi di Padova]{.smallcaps}\
-&\
-[INFN Sezione di Padova]{.smallcaps}
-:::
-
-2026-07-10
-::::
+---
 
 # The Lunar Lander Environment {#sec:lunar_lander}
 
