@@ -4,10 +4,6 @@
  
 **Author:** Sapkas Michail
 
-**Student ID:** 2154102
-
-**Email:** michail.sapkas@phd.unipd.it
-
 ---
 
 ## Course Submission
@@ -26,7 +22,7 @@ July 10, 2026
 
 # The Lunar Lander Environment
 
-The *Lunar Lander* environment, maintained within the Farama Foundation's *Gymnasium* library \[\[^1]], is a classic rocket trajectory optimization problem widely utilized as a benchmark task in reinforcement learning (RL). The simulation models a spacecraft attempting to land safely on a designated landing pad surrounded by a randomized, uneven lunar terrain. The primary objective is to pilot the vehicle from the top to the coordinate origin $(0,0)$ which is the designated landing pad flanked by two flags, while minimizing fuel consumption, balancing orientation, and ensuring zero final touchdown velocity. An episode terminates if the lander crashes, flies out of bounds, or comes to a complete rest. Additionally, to prevent infinite hovering states, the environment enforces a strict time-limit truncation after a maximum of $1000$ timesteps.
+The *Lunar Lander* environment, maintained within the Farama Foundation's *Gymnasium* library [^1], is a classic rocket trajectory optimization problem widely utilized as a benchmark task in reinforcement learning (RL). The simulation models a spacecraft attempting to land safely on a designated landing pad surrounded by a randomized, uneven lunar terrain. The primary objective is to pilot the vehicle from the top to the coordinate origin $(0,0)$ which is the designated landing pad flanked by two flags, while minimizing fuel consumption, balancing orientation, and ensuring zero final touchdown velocity. An episode terminates if the lander crashes, flies out of bounds, or comes to a complete rest. Additionally, to prevent infinite hovering states, the environment enforces a strict time-limit truncation after a maximum of $1000$ timesteps.
 
 ## Observation Space
 
@@ -59,11 +55,11 @@ An episode terminates when the lander crashes, ventures entirely out of bounds, 
 
 A primary challenge in training the agent is the sequential discovery of stable sub-behaviors. Early in the training lifecycle, the agent typically learns to stabilize its orientation and achieve a localized hovering state to avoid immediate crash penalties. However, this configuration frequently acts as a local minimum. Because the main engine constantly fires to maintain altitude, the agent routinely exhausts its 1000-step action budget, resulting in episode truncation without achieving a successful touchdown. It typically requires several training epochs for the policy to overcome this hovering policy, decouple the fear of crashing from the landing objective, and safely guide the vehicle to a graceful descent within the designated landing zone.
 
-\---
+---
 
 # Deep Q-Networks (DQN)
 
-The Deep Q-Network (DQN) architecture \[\[^2]] utilizes a feed-forward neural network to approximate the optimal action-value function, $Q^\*(s, a)$. The network maps the 8-dimensional observation vector through two hidden dense layers of 128 neurons each, culminating in an output layer of 4 neurons representing the discrete action space. Consequently, at each operational timestep, the agent maintains immediate access to an estimation of the expected cumulative future reward for each of the four possible actions.
+The Deep Q-Network (DQN) architecture [^2] utilizes a feed-forward neural network to approximate the optimal action-value function, $Q^\*(s, a)$. The network maps the 8-dimensional observation vector through two hidden dense layers of 128 neurons each, culminating in an output layer of 4 neurons representing the discrete action space. Consequently, at each operational timestep, the agent maintains immediate access to an estimation of the expected cumulative future reward for each of the four possible actions.
 
 To stabilize training, an experience replay buffer with a maximum capacity of 100,000 transition tuples is implemented. The training pipeline initializes with a 10,000-step warmup period during which actions are sampled purely uniformly at random to populate the buffer. Following this phase, optimization occurs at a training frequency of every 4 environment steps. Network stability is maintained using a separate target network updated every 100 steps via a Polyak (soft) update rule with a smoothing coefficient of $\\tau = 0.5$. The maximum horizon for the training process is strictly capped at a total of 300,000 environment steps. The $\\gamma$ value is set to $0.99$. To navigate the exploration-exploitation trade-off within the discrete action space, two distinct action-selection mechanisms were evaluated for the DQN agent.
 
@@ -126,7 +122,7 @@ However, a highly prominent feature unique to the Boltzmann method is the locali
 
 ## Deep Recurrent Q-Networks (DRQN)
 
-To evaluate the impact of temporal modeling, a Deep Recurrent Q-Network (DRQN) \[\[^3]] utilizing a Gated Recurrent Unit (GRU) \[\[^4]] was implemented. Theoretically, because the Lunar Lander observation space encapsulates full state visibility, the Markov property holds, and introducing a recurrent memory mechanism should yield negligible architectural advantages. However, exploring recurrent dynamics in this domain provides valuable empirical insights into sequence-based optimization constraints.
+To evaluate the impact of temporal modeling, a Deep Recurrent Q-Network (DRQN) [^3] utilizing a Gated Recurrent Unit (GRU) [^4] was implemented. Theoretically, because the Lunar Lander observation space encapsulates full state visibility, the Markov property holds, and introducing a recurrent memory mechanism should yield negligible architectural advantages. However, exploring recurrent dynamics in this domain provides valuable empirical insights into sequence-based optimization constraints.
 
 ### Network Architecture
 
@@ -180,11 +176,11 @@ Designing, coding, and deploying the DRQN architecture undoubtedly represented t
 
 Despite these optimization hurdles and the acute sensitivity of the recurrent layers, the network successfully demonstrated a remarkably steady, upward learning trend. The GRU proved capable of consolidating temporal history over extended horizons to gradually improve its flight profiles. This steady progression suggests that while recurrent networks introduce severe training overhead and structural complexity in fully observable domains, they possess a robust capacity for systematic policy improvement when granted adequate temporal stabilization.
 
-\---
+---
 
 # Deep Deterministic Policy Gradient (DDPG)
 
-To tackle the continuous variant of the Lunar Lander problem, the framework transitions from value-based discrete estimation to an actor-critic paradigm via the Deep Deterministic Policy Gradient (DDPG) \[\[^6]] algorithm. This modification alters the underlying control task: instead of choosing from four discrete engines, the agent must output a continuous two-dimensional vector $a\_t \\in \[-1, 1]^2$ regulating the main throttle and lateral boosters simultaneously.
+To tackle the continuous variant of the Lunar Lander problem, the framework transitions from value-based discrete estimation to an actor-critic paradigm via the Deep Deterministic Policy Gradient (DDPG) [^6] algorithm. This modification alters the underlying control task: instead of choosing from four discrete engines, the agent must output a continuous two-dimensional vector $a\_t \\in \[-1, 1]^2$ regulating the main throttle and lateral boosters simultaneously.
 
 ### Network Architectures and Interfacing
 
@@ -239,7 +235,7 @@ Interestingly, while the mean number of training episodes per run was only margi
 
 # Proximal Policy Optimization (PPO)
 
-For the last RL algorithm a Proximal Policy Optimization (PPO) \[\[^7]] agent was implemented. PPO shifts the paradigm from off-policy deterministic tracking to an on-policy stochastic framework. This methodology optimizes a clipped surrogate objective function to ensure that policy updates do not deviate drastically from the historical behavioral policy, stabilizing policy gradients without requiring a dedicated target architecture.
+For the last RL algorithm a Proximal Policy Optimization (PPO) [^7] agent was implemented. PPO shifts the paradigm from off-policy deterministic tracking to an on-policy stochastic framework. This methodology optimizes a clipped surrogate objective function to ensure that policy updates do not deviate drastically from the historical behavioral policy, stabilizing policy gradients without requiring a dedicated target architecture.
 
 ### Network Architectures and Stochastic Interfacing
 
@@ -254,7 +250,7 @@ The networks are optimized independently using separate Adam configurations, app
 
 As an on-policy algorithm, PPO alternates between environmental data collection and optimization phases. Trajectories are gathered over a fixed horizon of $T\_{\\text{horizon}} = 2048$ timesteps, storing states, actions, rewards, terminal masks, and the corresponding log-probabilities ($\\log \\pi\_{\\theta\_{\\text{old}}}(a\_t|s\_t)$) of the behavioral policy.
 
-To achieve an optimal balance between bias and variance when evaluating policy trajectories, Generalized Advantage Estimation (GAE) \[\[^8]] is performed over the collected buffer. For a discount factor $\\gamma = 0.99$ and a smoothing hyperparameter $\\lambda = 0.95$, the temporal difference (TD) residual $\\delta\_t$ and the generalized advantage estimator $\\hat{A}\_t$ at step $t$ are computed as follows:
+To achieve an optimal balance between bias and variance when evaluating policy trajectories, Generalized Advantage Estimation (GAE) [^8] is performed over the collected buffer. For a discount factor $\\gamma = 0.99$ and a smoothing hyperparameter $\\lambda = 0.95$, the temporal difference (TD) residual $\\delta\_t$ and the generalized advantage estimator $\\hat{A}\_t$ at step $t$ are computed as follows:
 
 $$\\begin{align}
 \\delta\_t \&= r\_t + \\gamma V^\\phi(s\_{t+1})(1 - d\_t) - V^\\phi(s\_t) \\
@@ -311,19 +307,19 @@ Ultimately, the primary takeaway from these experiments is the extreme sensitivi
 
 ## 📚 References
 
-\[^1]: Towers et al. (2025). *Gymnasium: A Standard Interface for Reinforcement Learning Environments*. [Farama Foundation](https://farama.org/).
+[^1]: Towers et al. (2025). *Gymnasium: A Standard Interface for Reinforcement Learning Environments*. [Farama Foundation](https://farama.org/).
 
-\[^2]: Mnih et al. (2013). *Playing Atari with Deep Reinforcement Learning*. [arXiv:1312.5602](https://arxiv.org/abs/1312.5602).
+[^2]: Mnih et al. (2013). *Playing Atari with Deep Reinforcement Learning*. [arXiv:1312.5602](https://arxiv.org/abs/1312.5602).
 
-\[^3]: Hausknecht \& Stone (2015). *Deep Recurrent Q-Learning for Partially Observable MDPs*. [arXiv:1507.06527](https://arxiv.org/abs/1507.06527).
+[^3]: Hausknecht \& Stone (2015). *Deep Recurrent Q-Learning for Partially Observable MDPs*. [arXiv:1507.06527](https://arxiv.org/abs/1507.06527).
 
-\[^4]: Chung et al. (2014). *Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling*. [arXiv:1412.3555](https://arxiv.org/abs/1412.3555).
+[^4]: Chung et al. (2014). *Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling*. [arXiv:1412.3555](https://arxiv.org/abs/1412.3555).
 
-\[^5]: Akiba et al. (2019). *Optuna: A Next-generation Hyperparameter Optimization Framework*. [ACM Digital Library](https://dl.acm.org/doi/10.1145/3330732.3366117).
+[^5]: Akiba et al. (2019). *Optuna: A Next-generation Hyperparameter Optimization Framework*. [ACM Digital Library](https://dl.acm.org/doi/10.1145/3330732.3366117).
 
-\[^6]: Lillicrap et al. (2015). *Continuous Control with Deep Reinforcement Learning*. [arXiv:1509.02971](https://arxiv.org/abs/1509.02971).
+[^6]: Lillicrap et al. (2015). *Continuous Control with Deep Reinforcement Learning*. [arXiv:1509.02971](https://arxiv.org/abs/1509.02971).
 
-\[^7]: Schulman et al. (2017). *Proximal Policy Optimization Algorithms*. [arXiv:1707.06347](https://arxiv.org/abs/1707.06347).
+[^7]: Schulman et al. (2017). *Proximal Policy Optimization Algorithms*. [arXiv:1707.06347](https://arxiv.org/abs/1707.06347).
 
-\[^8]: Schulman et al. (2015). *High-Dimensional Continuous Control Using Generalized Advantage Estimation*. [arXiv:1506.02438](https://arxiv.org/abs/1506.02438).
+[^8]: Schulman et al. (2015). *High-Dimensional Continuous Control Using Generalized Advantage Estimation*. [arXiv:1506.02438](https://arxiv.org/abs/1506.02438).
 
