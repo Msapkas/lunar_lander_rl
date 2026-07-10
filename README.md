@@ -73,7 +73,7 @@ This strategy balances exploration and exploitation by selecting a completely ra
 $\\epsilon\_{\\text{start}} = 1.0, \\epsilon\_{\\text{decay}} = 0.9945, \\epsilon\_{\\text{min}} = 0.02$.
 
 <p align="center">
-  <img src="./images/dqn\_lunar\_lander\_training\_progress.png" width="85%" />
+  <img src="./images/dqn_lunar_lander_training_progress.png" width="85%" />
   <br>
   <em>Figure 1: One training run with ϵ-Greedy DQN Rewards</em>
 </p>
@@ -107,13 +107,13 @@ $$\\begin{align\*}
 \\end{align\*}$$
 
 <p align="center">
-  <img src="./images/dqn\_botlz\_lunar\_lander.png" width="85%" />
+  <img src="./images/dqn_botlz_lunar_lander.png" width="85%" />
   <br>
   <em>Figure 3: One complete DQN Training run with Boltzmann exploration</em>
 </p>
 
 <p align="center">
-  <img src="./images/DQN\_B.png" width="85%" />
+  <img src="./images/DQN_B.png" width="85%" />
   <br>
   <em>Figure 4: 10 DQN Training Runs using Boltzmann exploration</em>
 </p>
@@ -163,7 +163,7 @@ A major architectural challenge in DRQN training involves the initialization of 
 To allow the hidden state to stabilize and adapt to the latent history before gradient accumulation begins, a *burn-in* period of $6$ timesteps is enforced. The model processes the first $6$ frames of the sequence through a forward pass without tracking gradients. For sequences that have been front-padded due to short episode lengths, the initial hidden state defaults safely to a zero-initialized tensor ($\\mathbf{0} \\in \\mathbb{R}^{1 \\times 1 \\times 284}$), and the network utilizes the un-averaged padded steps to warm up recurrent values before gradient calculation.
 
 <p align="center">
-  <img src="./images/rnn\_drqn\_lunar\_lander\_progress.png" width="85%" />
+  <img src="./images/rnn_drqn_lunar_lander_progress.png" width="85%" />
   <br>
   <em>Figure 5: One training run using a GRU with the DRQN algorithm</em>
 </p>
@@ -218,7 +218,7 @@ During a training iteration, a uniform mini-batch of size $64$ is sampled. In th
    $$\\mathcal{L}(\\theta) = -\\frac{1}{N}\\sum Q\_\\phi\\left(s\_t, \\mu\_{\\theta}(s\_t)\\right)$$
 
 <p align="center">
-  <img src="./images/ddpg\_lunar\_lander\_progress.png" width="85%" />
+  <img src="./images/ddpg_lunar_lander_progress.png" width="85%" />
   <br>
   <em>Figure 7: One training run with the DDPG algorithm</em>
 </p>
@@ -235,7 +235,7 @@ The DDPG implementation demonstrated exceptional training stability and policy r
 
 Interestingly, while the mean number of training episodes per run was only marginally higher (approximately 100 additional episodes), the cumulative step count expanded drastically. This indicates that a DDPG agent takes significantly more environment steps to resolve each individual episode. In a continuous control setting, the agent must fine-tune a complex, two-dimensional continuous thrust mapping rather than executing coarse discrete choices and consequently, early-to-mid-stage policies often lead to prolonged, cautious hovering trajectories before a terminal landing or crash is triggered.
 
-\---
+---
 
 # Proximal Policy Optimization (PPO)
 
@@ -278,7 +278,7 @@ $$\\mathcal{L}^{\\text{TOTAL}}(\\theta, \\phi) = -\\mathcal{L}^{\\text{CLIP}}(\\
 With a fixed $\\alpha\_{\\text{entropy}}$ parameter of 0.001.
 
 <p align="center">
-  <img src="./images/ppo\_lunar\_lander\_progress.png" width="85%" />
+  <img src="./images/ppo_lunar_lander_progress.png" width="85%" />
   <br>
   <em>Figure 9: One training run with the PPO algorithm</em>
 </p>
@@ -299,7 +299,7 @@ While PPO ultimately demonstrated robust convergence and exceptional sample effi
 
 PPO proved to be the best framework for this continuous control task. A key behavioral advantage of the policy was the execution of remarkably natural, smooth, and safe flight maneuvers during the final terminal landing phase. Furthermore, the algorithm exhibited superior step-to-episode throughput, completing nearly $1,000$ full episodes within the strict $300,000$ total.
 
-\---
+---
 
 # Concluding Remarks
 
@@ -307,16 +307,23 @@ This project evaluated several value-based and actor-critic reinforcement learni
 
 Ultimately, the primary takeaway from these experiments is the extreme sensitivity of all evaluated algorithms to their hyperparameters. The difference between smooth learning and complete policy failure heavily depended on fine-tuning engineering details. This underscores that choosing a powerful algorithm is not enough; careful parameter tuning and stabilization techniques remain the true deciding factors in successfully solving non-linear control tasks.
 
-\---
+---
 
 ## 📚 References
 
 \[^1]: Towers et al. (2025). *Gymnasium: A Standard Interface for Reinforcement Learning Environments*. [Farama Foundation](https://farama.org/).
+
 \[^2]: Mnih et al. (2013). *Playing Atari with Deep Reinforcement Learning*. [arXiv:1312.5602](https://arxiv.org/abs/1312.5602).
+
 \[^3]: Hausknecht \& Stone (2015). *Deep Recurrent Q-Learning for Partially Observable MDPs*. [arXiv:1507.06527](https://arxiv.org/abs/1507.06527).
+
 \[^4]: Chung et al. (2014). *Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling*. [arXiv:1412.3555](https://arxiv.org/abs/1412.3555).
+
 \[^5]: Akiba et al. (2019). *Optuna: A Next-generation Hyperparameter Optimization Framework*. [ACM Digital Library](https://dl.acm.org/doi/10.1145/3330732.3366117).
+
 \[^6]: Lillicrap et al. (2015). *Continuous Control with Deep Reinforcement Learning*. [arXiv:1509.02971](https://arxiv.org/abs/1509.02971).
+
 \[^7]: Schulman et al. (2017). *Proximal Policy Optimization Algorithms*. [arXiv:1707.06347](https://arxiv.org/abs/1707.06347).
+
 \[^8]: Schulman et al. (2015). *High-Dimensional Continuous Control Using Generalized Advantage Estimation*. [arXiv:1506.02438](https://arxiv.org/abs/1506.02438).
 
