@@ -22,7 +22,7 @@
 
 July 10, 2026
 
-\---
+---
 
 # The Lunar Lander Environment
 
