@@ -7,18 +7,18 @@
 > \*\*Email:\*\* \[michail.sapkas@phd.unipd.it](mailto:michail.sapkas@phd.unipd.it)  
 >
 > ---
-> 
-> ### 🎓 Course Submission
-> \*Submitted for the course of\* \*\*Prof. Giorgio Carlo Buttazzo\*\* 
+>
+### 🎓 Course Submission
 
-> \*\*PhD Program in Technologies for Fundamental Research in Physics and Astrophysics\*\* 
+\*Submitted for the course of\* \*\*Prof. Giorgio Carlo Buttazzo\*\* 
 
-> \*Dipartimento di Fisica ed Astronomia "Galileo Galilei"\* 
+\*\*PhD Program in Technologies for Fundamental Research in Physics and Astrophysics\*\* 
 
-> \*\*UNIVERSITÀ DEGLI STUDI DI PADOVA \& INFN SEZIONE DI PADOVA\*\* 
+\*Dipartimento di Fisica ed Astronomia "Galileo Galilei"\* 
 
-> 
-> 🗓️ \*July 10, 2026\*
+\*\*UNIVERSITÀ DEGLI STUDI DI PADOVA \& INFN SEZIONE DI PADOVA\*\* 
+
+🗓️ \*July 10, 2026\*
 
 \---
 
